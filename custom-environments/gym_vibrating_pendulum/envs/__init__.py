@@ -1,0 +1,1 @@
+from gym_vibrating_pendulum.envs.vibrating_pendulum_env import VibPenEnv
