@@ -136,7 +136,7 @@ from os import path
 class VibPenEnv(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 60
+        'video.frames_per_second': 24
     }
 
     def __init__(self):
@@ -198,7 +198,7 @@ class VibPenEnv(gym.Env):
         x = h*sinwt
         sm = act[2]
         theta_ddot = (torque/(m*(l**2))) + (((w**2)*x/l)*costheta)+((-g/l)*sintheta)
-        theta_ddot += (1 - theta_dot)*10 + sm*10
+        theta_ddot += (1 - theta_dot)*2 + sm*2
         theta_dot = theta_dot + theta_ddot*dt
         # print(act[1], (-g/l)*sintheta, act[2], ((w**2)*x/l)*costheta,theta_ddot)
         # print((act[1]/(m*(l**2))) + ((-g/l)*sintheta), (act[2]/(m*(l**2))) + (((w**2)*x/l)*costheta))
