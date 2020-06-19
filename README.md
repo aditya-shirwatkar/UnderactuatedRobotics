@@ -9,7 +9,7 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 
 <p align="center"><img src="https://latex.codecogs.com/gif.latex?m&space;l^2&space;\ddot&space;\theta&space;&plus;&space;m&space;g&space;l&space;\sin&space;\theta&space;=&space;m&space;l&space;\omega^2&space;h&space;\sin&space;(\omega&space;t)&space;\cos&space;\theta&space;&plus;&space;u." title="m l^2 \ddot \theta + m g l \sin \theta = m l \omega^2 h \sin (\omega t) \cos \theta + u." /></p>
 
-<p align="center">The goal is to design a time-dependent control law <img src="https://latex.codecogs.com/gif.latex?u&space;=&space;\pi&space;(\theta,&space;\dot&space;\theta,&space;t)" title="u = \pi (\theta, \dot \theta, t)" /> that makes the pendulum spin at constant velocity <img src="https://latex.codecogs.com/gif.latex?\dot&space;\theta&space;=&space;1" title="\dot \theta = 1" />,</p>
+<p align="center">The goal is to design a time-dependent policy <img src="https://latex.codecogs.com/gif.latex?u&space;=&space;\pi&space;(\theta,&space;\dot&space;\theta,&space;t)" title="u = \pi (\theta, \dot \theta, t)" /> that makes the pendulum spin at constant velocity <img src="https://latex.codecogs.com/gif.latex?\dot&space;\theta&space;=&space;1" title="\dot \theta = 1" />,</p>
  
  
 <p align="center">below is the result through feedback cancellation,</p>
