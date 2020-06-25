@@ -1,9 +1,9 @@
 I'll be implementing few algorithms in Underactuated Robotics and also solving some interesting problems
 - [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
 - [Double Integrtor](#double-integrator)
-  * [lqr](#lqr)
+  * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
 
-# Pendulum with Vibrating Base
+## Pendulum with Vibrating Base
 <p>Consider <a href = https://github.com/aditya-shirwatkar/UnderactuatedRobotics/tree/master/Pendulum%20with%20Vibrating%20Base> here </a>
  an actuated pendulum whose base (pivot of the rod) is forced to oscillate horizontally according to the harmonic law
 <img src="https://latex.codecogs.com/gif.latex?h&space;*&space;\sin{\omega&space;t}" title="h * \sin{\omega t}" />
@@ -19,7 +19,7 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 <p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Pendulum%20with%20Vibrating%20Base/vibPen_const_ang_vel.gif" /></p>
 
 
-# Double Integrator
+## Double Integrator
 <p>Consider the double integrator system</p>
 
 <p><img src="https://latex.codecogs.com/gif.latex?\ddot{q}&space;=&space;u,&space;\quad&space;|u|&space;\le&space;1." title="\ddot{q} = u, \quad |u| \le 1." /></p>
@@ -29,4 +29,6 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 .
 </p>
 
-## lqr
+#### LQR (Linear Quadratic Regulator)
+<p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
+<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/double_integrator_lqr.gif" /></p>
