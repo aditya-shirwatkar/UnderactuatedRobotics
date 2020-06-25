@@ -1,8 +1,16 @@
 I'll be implementing few algorithms in Underactuated Robotics and also solving some interesting problems
+
+## Table of Contents
 - [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
 - [Double Integrtor](#double-integrator)
   * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
 
+
+- [List of Custom Environments](#list-of-custom-environments)
+  * [Quadrotor-2D](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/quadrotor_2d_env.py)
+  * [Horizontally Vibrating Pendulum](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/vibrating_pendulum_env.py)
+  * [Double Integrator](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/double_integrator_env.py)
+  
 ## Pendulum with Vibrating Base
 <p>Consider <a href = https://github.com/aditya-shirwatkar/UnderactuatedRobotics/tree/master/Pendulum%20with%20Vibrating%20Base> here </a>
  an actuated pendulum whose base (pivot of the rod) is forced to oscillate horizontally according to the harmonic law
