@@ -95,14 +95,14 @@ class Quad2DEnv(gym.Env):
         return np.array(self.state), reward, done, {}
 
     def reset(self):
-        # self.state = [np.random.uniform(low=-self.x_threshold, high=self.x_threshold),
-        #               0,
-        #               np.random.uniform(low=-self.y_threshold, high=self.y_threshold),
-        #               0,
-        #               np.random.uniform(low=-self.O_threshold, high=self.O_threshold),
-        #               0]
+        self.state = [np.random.uniform(low=-self.x_threshold, high=self.x_threshold),
+                      0,
+                      np.random.uniform(low=-self.y_threshold, high=self.y_threshold),
+                      0,
+                      np.random.uniform(low=-self.O_threshold, high=self.O_threshold),
+                      0]
         # self.steps_beyond_done = None
-        self.state = np.array([0., 0, 0., 0, np.pi/8, 0])
+        # self.state = np.array([0., 0, 0., 0, np.pi/8, 0])
         return np.array(self.state)
 
     def render(self, mode='human'):
