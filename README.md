@@ -31,4 +31,4 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 
 #### LQR (Linear Quadratic Regulator)
 <p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
-<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/double_integrator_lqr.gif" /></p>
+<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_lqr.gif" /></p>
