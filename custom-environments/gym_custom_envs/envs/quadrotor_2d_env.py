@@ -12,9 +12,9 @@ class Quad2DEnv(gym.Env):
     }
 
     def __init__(self):
-        self.gravity = 9.8
-        self.m = 1.0
-        self.l = 0.35
+        self.gravity = 9.81
+        self.m = 0.486 
+        self.l = 0.25 
         self.I = self.m*(self.l**2)/12
         self.thrust_max = 15.0
         self.dt = 0.005  # seconds between state updates
@@ -22,7 +22,7 @@ class Quad2DEnv(gym.Env):
 
         self.x_threshold = 2.4
         self.y_threshold = 2.4
-        self.O_threshold = np.pi
+        self.O_threshold = 2*np.pi
 
         self.goal = np.array([0.0 ,0.0, 0.0])
 
@@ -51,7 +51,10 @@ class Quad2DEnv(gym.Env):
 
     def step(self, act):
 
-        x, x_dot, y, y_dot, theta, theta_dot = self.state
+        x, y, theta, x_dot, y_dot, theta_dot = self.state
+        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi  # converts phi to [0, 2*np.pi]
+        # converts phi to [-np.pi, np.pi]
+        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
         dt = self.dt
         m = self.m
         l = self.l
@@ -59,7 +62,6 @@ class Quad2DEnv(gym.Env):
         g = self.gravity
         u1 = act[0]
         u2 = act[1]
-
         costheta = np.cos(theta)
         sintheta = np.sin(theta)
 
@@ -72,10 +74,12 @@ class Quad2DEnv(gym.Env):
         x_dot = x_dot + x_ddot*dt
 
         theta = theta + theta_dot * dt
+        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi
         y = y + y_dot * dt
         x = x + x_dot * dt
 
-        self.state = (x, x_dot, y, y_dot, theta, theta_dot)
+        self.state = (x, y, theta, x_dot, y_dot, theta_dot)
 
         done = bool(
             x < -self.x_threshold
@@ -84,38 +88,47 @@ class Quad2DEnv(gym.Env):
             or y > self.y_threshold
         )
 
+        done2 = bool(
+            abs(x) < 0.1
+            and abs(y) < 0.1
+            and abs(theta) < 0.1
+            and abs(x_dot) < 0.1
+            and abs(y_dot) < 0.1
+            and abs(theta_dot) < 0.1
+        )
+
         if not done:
             reward = 1.0
         else:
             reward = 0.0
 
-        if abs(x - self.goal[0]) <= 0.1 and abs(y - self.goal[0]) <= 0.1 and abs(theta - self.goal[0]) <= 0.05:
+        if done2:
             done = True
 
         return np.array(self.state), reward, done, {}
 
     def reset(self):
         self.state = [np.random.uniform(low=-self.x_threshold, high=self.x_threshold),
-                      0,
                       np.random.uniform(low=-self.y_threshold, high=self.y_threshold),
-                      0,
-                      np.random.uniform(low=-self.O_threshold, high=self.O_threshold),
-                      0]
+                      np.random.uniform(low=-self.O_threshold/6, high=self.O_threshold/6),
+                      0,0,0]
         # self.steps_beyond_done = None
-        # self.state = np.array([0., 0, 0., 0, np.pi/8, 0])
+        # self.state = np.array([0., 1., 0., 0., 0., 0.])
         return np.array(self.state)
 
     def render(self, mode='human'):
         screen_width = 800
         screen_height = 600
 
-        x, x_dot, y, y_dot, theta, theta_dot = self.state
-
+        x, y, theta, x_dot, y_dot, theta_dot = self.state
+        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi
+        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
         world_width = self.x_threshold * 2
         scale = screen_width/world_width
+        # cartx = x
+        # carty = y
         carty = y * scale + screen_height/ 2.0 # TOP OF CART
         cartx = x * scale + screen_width / 2.0
-        theta = theta
         polewidth = 10.0
         polelen = scale * (2 * self.l)
         fan_width = 10.0
