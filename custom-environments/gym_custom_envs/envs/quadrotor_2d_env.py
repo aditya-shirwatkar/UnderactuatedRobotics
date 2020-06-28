@@ -52,8 +52,6 @@ class Quad2DEnv(gym.Env):
     def step(self, act):
 
         x, y, theta, x_dot, y_dot, theta_dot = self.state
-        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi  # converts phi to [0, 2*np.pi]
-        # converts phi to [-np.pi, np.pi]
         theta = (((theta+np.pi) % (2*np.pi))) - np.pi
         dt = self.dt
         m = self.m
@@ -75,7 +73,6 @@ class Quad2DEnv(gym.Env):
 
         theta = theta + theta_dot * dt
         theta = (((theta+np.pi) % (2*np.pi))) - np.pi
-        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi
         y = y + y_dot * dt
         x = x + x_dot * dt
 
@@ -112,8 +109,6 @@ class Quad2DEnv(gym.Env):
                       np.random.uniform(low=-self.y_threshold, high=self.y_threshold),
                       np.random.uniform(low=-self.O_threshold/6, high=self.O_threshold/6),
                       0,0,0]
-        # self.steps_beyond_done = None
-        # self.state = np.array([0., 1., 0., 0., 0., 0.])
         return np.array(self.state)
 
     def render(self, mode='human'):
@@ -121,13 +116,10 @@ class Quad2DEnv(gym.Env):
         screen_height = 600
 
         x, y, theta, x_dot, y_dot, theta_dot = self.state
-        # theta = np.arctan2(np.sin(theta), np.cos(theta)) + np.pi
         theta = (((theta+np.pi) % (2*np.pi))) - np.pi
         world_width = self.x_threshold * 2
         scale = screen_width/world_width
-        # cartx = x
-        # carty = y
-        carty = y * scale + screen_height/ 2.0 # TOP OF CART
+        carty = y * scale + screen_height/ 2.0 
         cartx = x * scale + screen_width / 2.0
         polewidth = 10.0
         polelen = scale * (2 * self.l)
@@ -137,37 +129,20 @@ class Quad2DEnv(gym.Env):
         if self.viewer is None:
             from gym.envs.classic_control import rendering
             self.viewer = rendering.Viewer(screen_width, screen_height)
-            # l, r, t, b = -cartwidth / 2, cartwidth / 2, cartheight / 2, -cartheight / 2
-            # axleoffset = cartheight / 4.0
-            # cart = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
-            # self.carttrans = rendering.Transform()
-            # cart.add_attr(self.carttrans)
-            # self.viewer.add_geom(cart)
             l, r, t, b = -polelen / 2, polelen / 2, polewidth/2, -polewidth / 2
             pole = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
             pole.set_color(.8, .6, .4)
-            self.pole_trans = rendering.Transform(
-                                                  # translation=((polelen/2),
-                                                  #              (polelen/2))
-                                                  )
+            self.pole_trans = rendering.Transform()
             pole.add_attr(self.pole_trans)
             self.viewer.add_geom(pole)
-            # l, r, t, b = -fan_width / 2, fan_width / 2, fan_height - fan_width / 2, -fan_width / 2
-            # fans = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
-            # pole.set_color(.0, .6, .4)
             l, r, t, b = -fan_width / 2, fan_width / 2, fan_height - fan_width / 2, -fan_width / 2
             axle1 = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
-            # axle1 = rendering.make_circle(polewidth/2)
             axle1.set_color(.5, .5, .8)
-            self.axle1_trans = rendering.Transform(
-                                                  # translation=(- (polelen/2),
-                                                  #              - (polelen/2))
-                                                  )
+            self.axle1_trans = rendering.Transform()
             axle1.add_attr(self.axle1_trans)
             self.viewer.add_geom(axle1)
 
             axle2 = rendering.FilledPolygon([(l, b), (l, t), (r, t), (r, b)])
-            # axle2 = rendering.make_circle(polewidth/2)
             axle2.set_color(.5, .5, .8)
             self.axle2_trans = rendering.Transform()
             axle2.add_attr(self.axle2_trans)
@@ -206,16 +181,9 @@ class Quad2DEnv(gym.Env):
                                           carty)
         self.tracky_trans.set_translation(cartx,
                                           carty)
-        # self.trackx_trans.set_rotation(theta)
-        # self.tracky_trans.set_rotation(theta)
-        # rotation = theta,
-        # translation = (cartx - (polelen / 2 * np.cos(theta)),
-        #                carty - (polelen / 2 * np.sin(theta)))
-
         self.axle1_trans.set_translation(cartx + (polelen/2*np.cos(theta)),
                                          carty + (polelen/2*np.sin(theta)))
         self.axle1_trans.set_rotation(theta)
-        #
         self.axle2_trans.set_translation(cartx - (polelen/2*np.cos(theta)),
                                         carty - (polelen/2*np.sin(theta)))
         self.axle2_trans.set_rotation(theta)
