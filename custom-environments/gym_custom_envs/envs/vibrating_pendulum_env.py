@@ -25,12 +25,6 @@ class VibPenEnv(gym.Env):
         self.dt = 0.005  # seconds between state updates
         self.kinematics_integrator = 'euler'
 
-        # Angle at which to fail the episode
-        self.theta_threshold_radians = 12 * 2 * math.pi / 360
-        self.x_threshold = 2.4
-
-        # Angle limit set to 2 * theta_threshold_radians so failing observation
-        # is still within bounds.
         high = np.array([self.x_threshold * 2,
                          np.finfo(np.float32).max,
                          self.theta_threshold_radians * 2,
@@ -51,8 +45,6 @@ class VibPenEnv(gym.Env):
         return [seed]
 
     def step(self, act):
-        # err_msg = "%r (%s) invalid" % (action, type(action))
-        # assert self.action_space.contains(action), err_msg
 
         x, x_dot, theta, theta_dot = self.state
         dt = self.dt
@@ -72,59 +64,17 @@ class VibPenEnv(gym.Env):
         theta_ddot = (torque/(m*(l**2))) + (((w**2)*x/l)*costheta)+((-g/l)*sintheta)
         theta_ddot += (1 - theta_dot)*2 + sm*2
         theta_dot = theta_dot + theta_ddot*dt
-        # print(act[1], (-g/l)*sintheta, act[2], ((w**2)*x/l)*costheta,theta_ddot)
-        # print((act[1]/(m*(l**2))) + ((-g/l)*sintheta), (act[2]/(m*(l**2))) + (((w**2)*x/l)*costheta))
-
         theta = theta + theta_dot * dt
-
-        # newthdot = np.clip(newthdot, -self.max_speed, self.max_speed)
-        # temp = (force + self.polemass_length * theta_dot ** 2 * sintheta) / self.total_mass
-        # thetaacc = (self.gravity * sintheta - costheta * temp) / (self.length * (4.0 / 3.0 - self.masspole * costheta ** 2 / self.total_mass))
-        # xacc = temp - self.polemass_length * thetaacc * costheta / self.total_mass
-
-        # if self.kinematics_integrator == 'euler':
-        #     x = x + self.tau * x_dot
-        #     x_dot = x_dot + self.tau * xacc
-        #     theta = theta + self.tau * theta_dot
-        #     theta_dot = theta_dot + self.tau * thetaacc
-        # else:  # semi-implicit euler
-        #     x_dot = x_dot + self.tau * xacc
-        #     x = x + self.tau * x_dot
-        #     theta_dot = theta_dot + self.tau * thetaacc
-        #     theta = theta + self.tau * theta_dot
 
         self.state = (x, x_dot, theta, theta_dot)
 
-        # done = bool(
-        #     x < -self.x_threshold
-        #     or x > self.x_threshold
-        #     or theta < -self.theta_threshold_radians
-        #     or theta > self.theta_threshold_radians
-        # )
-
         done = False
 
-        if not done:
-            reward = 1.0
-        elif self.steps_beyond_done is None:
-            # Pole just fell!
-            self.steps_beyond_done = 0
-            reward = 1.0
-        else:
-            # if self.steps_beyond_done == 0:
-            #     logger.warn(
-            #         "You are calling 'step()' even though this "
-            #         "environment has already returned done = True. You "
-            #         "should always call 'reset()' once you receive 'done = "
-            #         "True' -- any further steps are undefined behavior."
-            #     )
-            self.steps_beyond_done += 1
-            reward = 0.0
-
+        reward = 0.0 # you will need to change this if you want to train RL agents
+        
         return np.array(self.state), reward, done, {}
 
     def reset(self):
-        # self.state = self.np_random.uniform(low=-0.05, high=0.05, size=(4,))
         self.steps_beyond_done = None
         self.state = np.array([0, 0, 0, 0])
         return np.array(self.state)
@@ -165,11 +115,7 @@ class VibPenEnv(gym.Env):
             self.track = rendering.Line((0, carty), (screen_width, carty))
             self.track.set_color(0, 0, 0)
             self.viewer.add_geom(self.track)
-            # fname = path.join(path.dirname(__file__), "assets/clockwise.png")
-            # self.img = rendering.Image(fname, 1., 1.)
-            # self.imgtrans = rendering.Transform()
-            # self.img.add_attr(self.imgtrans)
-
+            
             self._pole_geom = pole
 
         if self.state is None:
@@ -184,11 +130,6 @@ class VibPenEnv(gym.Env):
         cartx = x[0] * scale + screen_width / 2.0  # MIDDLE OF CART
         self.carttrans.set_translation(cartx, carty)
         self.poletrans.set_rotation(x[2]+np.pi)
-        # self.imgtrans.set_translation(cartx, carty)
-        #
-        # if self.last_u:
-        #     self.imgtrans.scale = (-2*self.last_u, np.abs(2*self.last_u))
-
         return self.viewer.render(return_rgb_array=mode == 'rgb_array')
 
     def close(self):
