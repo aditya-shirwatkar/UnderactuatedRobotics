@@ -8,7 +8,7 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
   * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
 
 ## List of Custom Environments
-The below is a list of custom environments that I built using <a href="https://gym.openai.com/">OpenAI gym</a>
+The below is a list of custom environments that I built using <a href="https://gym.openai.com/">OpenAI gym</a>, feel free to use them however you want
   * [Quadrotor-2D](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/quadrotor_2d_env.py)
   * [Horizontally Vibrating Pendulum](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/vibrating_pendulum_env.py)
   * [Double Integrator](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/double_integrator_env.py)
