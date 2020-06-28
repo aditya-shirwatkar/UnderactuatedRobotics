@@ -12,9 +12,9 @@ class Quad2DEnv(gym.Env):
     }
 
     def __init__(self):
-        self.gravity = 9.81
-        self.m = 0.486 
-        self.l = 0.25 
+        self.gravity = 10.
+        self.m = 0.25
+        self.l = 0.5 
         self.I = self.m*(self.l**2)/12
         self.thrust_max = 15.0
         self.dt = 0.005  # seconds between state updates
