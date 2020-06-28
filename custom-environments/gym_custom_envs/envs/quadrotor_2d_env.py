@@ -13,7 +13,7 @@ class Quad2DEnv(gym.Env):
 
     def __init__(self):
         self.gravity = 10.
-        self.m = 0.25
+        self.m = 0.2
         self.l = 0.5 
         self.I = self.m*(self.l**2)/12
         self.thrust_max = 15.0
@@ -91,7 +91,7 @@ class Quad2DEnv(gym.Env):
         done2 = bool(
             abs(x) < 0.1
             and abs(y) < 0.1
-            and abs(theta) < 0.1
+            and abs(theta) < 0.01
             and abs(x_dot) < 0.1
             and abs(y_dot) < 0.1
             and abs(theta_dot) < 0.1
