@@ -12,4 +12,8 @@ register(
     id='Quadrotor2D-v0',
     entry_point='gym_custom_envs.envs:Quad2DEnv',
 )
+register(
+    id='CartPoleContinuous-v0',
+    entry_point='gym_custom_envs.envs:CartPoleContiEnv',
+)
 
