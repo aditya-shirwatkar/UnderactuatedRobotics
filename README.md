@@ -19,19 +19,19 @@ The below is a list of custom environments that I built using <a href="https://g
 ## Quadrotor-2D
 <p> Consider <a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/quadrotor_2d_env.py">here</a> an extremely simple model of a quadrotor that is restricted to live in the plane. The equations of motion are almost trivial, since it is only a single rigid body, and certainly fit into our standard manipulator equations: </p>
 
-<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/quadrotor-2d.png" /> </p>
+<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/quadrotor-2d.png" width="120" height="107"/> </p>
 <p>
-<img src="https://latex.codecogs.com/gif.latex?\begin{}&space;\\m&space;\ddot{x}&space;=&space;-(u_1&space;&plus;&space;u_2)\sin\theta,&space;\label{eq:quad_x}\\&space;m&space;\ddot{y}&space;=&space;(u_1&space;&plus;&space;u_2)\cos\theta&space;-&space;mg,&space;\label{eq:quad_y}\\&space;I&space;\ddot\theta&space;=&space;r&space;(u_1&space;-&space;u_2)&space;\label{eq:quad_theta}&space;\end{}" title="\begin{} \\m \ddot{x} = -(u_1 + u_2)\sin\theta, \label{eq:quad_x}\\ m \ddot{y} = (u_1 + u_2)\cos\theta - mg, \label{eq:quad_y}\\ I \ddot\theta = r (u_1 - u_2) \label{eq:quad_theta} \end{}" />
+<img src="https://latex.codecogs.com/gif.latex?\begin{}&space;\\m&space;\ddot{x}&space;=&space;-(u_1&space;&plus;&space;u_2)\sin\theta,&space;\label{eq:quad_x}\\&space;m&space;\ddot{y}&space;=&space;(u_1&space;&plus;&space;u_2)\cos\theta&space;-&space;mg,&space;\label{eq:quad_y}\\&space;I&space;\ddot\theta&space;=&space;r&space;(u_1&space;-&space;u_2)&space;\label{eq:quad_theta}&space;\end{}" title="\begin{} \\m \ddot{x} = -(u_1 + u_2)\sin\theta, \label{eq:quad_x}\\ m \ddot{y} = (u_1 + u_2)\cos\theta - mg, \label{eq:quad_y}\\ I \ddot\theta = r (u_1 - u_2) \label{eq:quad_theta} \end{}" width="150" height="60"/>
 </p>
 
 ### LQR on Quadrotor-2D
 LQR [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/lqr.ipynb) works essentially out of the box for Quadrotors, if linearized around a nominal fixed point (where the non-zero thrust from the propellers is balancing gravity).
 In this case nominal fixed point is 
 <p>
- <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}&space;x^*\\&space;y^*\\&space;\theta&space;^*\\&space;\dot{x}&space;^*\\&space;\dot{y}&space;^*\\&space;\dot{\theta}&space;^*&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;0\\&space;0\\&space;0\\&space;0\\&space;0\\&space;0&space;\end{bmatrix}&space;and&space;\begin{bmatrix}&space;u_1^*\\&space;u_2^*&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;\frac{mg}{2}\\&space;\frac{mg}{2}&space;\end{bmatrix}" title="\begin{bmatrix} x^*\\ y^*\\ \theta ^*\\ \dot{x} ^*\\ \dot{y} ^*\\ \dot{\theta} ^* \end{bmatrix} = \begin{bmatrix} 0\\ 0\\ 0\\ 0\\ 0\\ 0 \end{bmatrix} and \begin{bmatrix} u_1^*\\ u_2^* \end{bmatrix} = \begin{bmatrix} \frac{mg}{2}\\ \frac{mg}{2} \end{bmatrix}" />
+ <img src="https://latex.codecogs.com/gif.latex?\begin{bmatrix}&space;x^*\\&space;y^*\\&space;\theta&space;^*\\&space;\dot{x}&space;^*\\&space;\dot{y}&space;^*\\&space;\dot{\theta}&space;^*&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;0\\&space;0\\&space;0\\&space;0\\&space;0\\&space;0&space;\end{bmatrix}&space;and&space;\begin{bmatrix}&space;u_1^*\\&space;u_2^*&space;\end{bmatrix}&space;=&space;\begin{bmatrix}&space;\frac{mg}{2}\\&space;\frac{mg}{2}&space;\end{bmatrix}" title="\begin{bmatrix} x^*\\ y^*\\ \theta ^*\\ \dot{x} ^*\\ \dot{y} ^*\\ \dot{\theta} ^* \end{bmatrix} = \begin{bmatrix} 0\\ 0\\ 0\\ 0\\ 0\\ 0 \end{bmatrix} and \begin{bmatrix} u_1^*\\ u_2^* \end{bmatrix} = \begin{bmatrix} \frac{mg}{2}\\ \frac{mg}{2} \end{bmatrix}" width="160" height="107"/>
 </p>
 
-![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/quadrotor_lqr.gif)
+<img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/quadrotor_lqr.gif" width="400" height="250"/>
 
 ## CartPole Continous
 
