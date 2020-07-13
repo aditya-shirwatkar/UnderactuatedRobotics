@@ -3,12 +3,12 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 ## Table of Contents
 - [List of Custom Environments](#list-of-custom-environments)
 - [Quadrotor-2D](#quadrotor-2d)
-  * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
+  * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
 - [Cartpole Continous](#cartpole-continous)
-  * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
+  * [LQR on Cartpole Continous](#lqr-cartpole-continous)
 - [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
 - [Double Integrtor](#double-integrator)
-  * [LQR (Linear Quadratic Regulator)](#lqr-linear-quadratic-regulator)
+  * [LQR on Double Integrtor](#lqr-double-integrtor)
 
 ## List of Custom Environments
 The below is a list of custom environments that I built using <a href="https://gym.openai.com/">OpenAI gym</a>, feel free to use them however you want
@@ -24,7 +24,7 @@ The below is a list of custom environments that I built using <a href="https://g
 <img src="https://latex.codecogs.com/gif.latex?\begin{}&space;\\m&space;\ddot{x}&space;=&space;-(u_1&space;&plus;&space;u_2)\sin\theta,&space;\label{eq:quad_x}\\&space;m&space;\ddot{y}&space;=&space;(u_1&space;&plus;&space;u_2)\cos\theta&space;-&space;mg,&space;\label{eq:quad_y}\\&space;I&space;\ddot\theta&space;=&space;r&space;(u_1&space;-&space;u_2)&space;\label{eq:quad_theta}&space;\end{}" title="\begin{} \\m \ddot{x} = -(u_1 + u_2)\sin\theta, \label{eq:quad_x}\\ m \ddot{y} = (u_1 + u_2)\cos\theta - mg, \label{eq:quad_y}\\ I \ddot\theta = r (u_1 - u_2) \label{eq:quad_theta} \end{}" />
 </p>
 
-#### LQR (Linear Quadratic Regulator)
+### LQR on Quadrotor-2D
 LQR [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/lqr.ipynb) works essentially out of the box for Quadrotors, if linearized around a nominal fixed point (where the non-zero thrust from the propellers is balancing gravity).
 In this case nominal fixed point is 
 <p>
@@ -38,7 +38,7 @@ In this case nominal fixed point is
 The [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/cart_pole_conti_env.py) task is to balance a simple pendulum around its unstable equilibrium, using only horizontal forces on the cart. Balancing the cart-pole system is used in many introductory courses in control because it can be accomplished with simple linear control (e.g. pole placement) techniques.
 Consider the full swing-up and balance control problem, which requires a full nonlinear control treatment.
 
-#### LQR (Linear Quadratic Regulator)
+### LQR on Cartpole Continous
 [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/lqr.ipynb)
 
 ![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/cart_lqr.gif)
@@ -69,6 +69,6 @@ Consider the full swing-up and balance control problem, which requires a full no
 .
 </p>
 
-### LQR (Linear Quadratic Regulator)
+### LQR on Double Integrtor
 <p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
 <p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_lqr.gif" /></p>
