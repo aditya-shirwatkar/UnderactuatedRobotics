@@ -7,7 +7,7 @@ import numpy as np
 class CartPoleContiEnv(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
-        'video.frames_per_second': 50
+        'video.frames_per_second': 12
     }
 
     def __init__(self):
@@ -22,7 +22,7 @@ class CartPoleContiEnv(gym.Env):
         self.kinematics_integrator = 'euler'
 
         # Angle at which to fail the episode
-        self.theta_threshold_radians = 12 * 2 * math.pi / 360
+        self.theta_threshold_radians = 24 * 2 * math.pi / 360
         self.x_threshold = 2.4
 
         # Angle limit set to 2 * theta_threshold_radians so failing observation
@@ -39,7 +39,7 @@ class CartPoleContiEnv(gym.Env):
         self.seed()
         self.viewer = None
         self.state = None
-
+        self.reward_limit = 200
         self.steps_beyond_done = None
 
     def seed(self, seed=None):
@@ -89,6 +89,7 @@ class CartPoleContiEnv(gym.Env):
 
         if not done:
             reward = 1.0
+            self.reward_count += reward
         elif self.steps_beyond_done is None:
             # Pole just fell!
             self.steps_beyond_done = 0
@@ -103,15 +104,19 @@ class CartPoleContiEnv(gym.Env):
                 )
             self.steps_beyond_done += 1
             reward = 0.0
-
+        
+        if self.reward_limit <= self.reward_count:
+            done = True
+    
         return np.array(self.state), reward, done, {}
 
     def reset(self):
-        self.state = [self.np_random.uniform(low=-0.05, high=0.05),
-                      self.np_random.uniform(low=-np.deg2rad(0.1), high=np.deg2rad(0.1)),  
+        self.state = [self.np_random.uniform(low=-0.5, high=0.5),
+                      self.np_random.uniform(low=-self.theta_threshold_radians, high=self.theta_threshold_radians),  
                       0,
                       0]
         self.steps_beyond_done = None
+        self.reward_count = 0
         return np.array(self.state).reshape(4,)
 
     def render(self, mode='human'):

@@ -11,13 +11,13 @@ class Quad2DEnv(gym.Env):
         'video.frames_per_second': 24
     }
 
-    def __init__(self):
+    def __init__(self, dt=0.005):
         self.gravity = 10.
         self.m = 0.2
         self.l = 0.5 
         self.I = self.m*(self.l**2)/12
         self.thrust_max = 15.0
-        self.dt = 0.005  # seconds between state updates
+        self.dt = dt  # seconds between state updates
         self.kinematics_integrator = 'euler'
 
         self.x_threshold = 2.4
