@@ -4,11 +4,11 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 - [List of Custom Environments](#list-of-custom-environments)
 - [Quadrotor-2D](#quadrotor-2d)
   * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
-- [Cartpole Continous](#cartpole-continous)
-  * [LQR on Cartpole Continous](#lqr-cartpole-continous)
+- [CartPole Continous](#cartpole-continous)
+  * [LQR on CartPole Continous](#lqr-on-cartpole-continous)
 - [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
-- [Double Integrtor](#double-integrator)
-  * [LQR on Double Integrtor](#lqr-double-integrtor)
+- [Double Integrator](#double-integrator)
+  * [LQR on Double Integrator](#lqr-on-double-integrator)
 
 ## List of Custom Environments
 The below is a list of custom environments that I built using <a href="https://gym.openai.com/">OpenAI gym</a>, feel free to use them however you want
@@ -38,7 +38,7 @@ In this case nominal fixed point is
 The [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/cart_pole_conti_env.py) task is to balance a simple pendulum around its unstable equilibrium, using only horizontal forces on the cart. Balancing the cart-pole system is used in many introductory courses in control because it can be accomplished with simple linear control (e.g. pole placement) techniques.
 Consider the full swing-up and balance control problem, which requires a full nonlinear control treatment.
 
-### LQR on Cartpole Continous
+### LQR on CartPole Continous
 [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/lqr.ipynb)
 
 ![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/cart_lqr.gif)
@@ -69,6 +69,6 @@ Consider the full swing-up and balance control problem, which requires a full no
 .
 </p>
 
-### LQR on Double Integrtor
+### LQR on Double Integrator
 <p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
 <p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_lqr.gif" /></p>
