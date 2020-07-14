@@ -5,8 +5,8 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 - [Quadrotor-2D](#quadrotor-2d)
   * [Trajectory Optimization on Quadrotor-2D](#trajectory-optimization-on-quadrotor-2d)
   * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
-- [CartPole Continous](#cartpole-continous)
-  * [LQR on CartPole Continous](#lqr-on-cartpole-continous)
+- [CartPole Continuous](#cartpole-continuous)
+  * [LQR on CartPole Contiunous](#lqr-on-cartpole-contiunous)
 - [Double Integrator](#double-integrator)
   * [LQR on Double Integrator](#lqr-on-double-integrator)
   * [Trajectory Optimization on Double Integrator](#trajectory-optimization-on-double-integrator)
@@ -42,12 +42,12 @@ In this case nominal fixed point is
 
 <img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/quadrotor_lqr.gif" width="400" height="250"/>
 
-## CartPole Continous
+## CartPole Continuous
 
 The [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/custom-environments/gym_custom_envs/envs/cart_pole_conti_env.py) task is to balance a simple pendulum around its unstable equilibrium, using only horizontal forces on the cart. Balancing the cart-pole system is used in many introductory courses in control because it can be accomplished with simple linear control (e.g. pole placement) techniques.
 Consider the full swing-up and balance control problem, which requires a full nonlinear control treatment.
 
-### LQR on CartPole Continous
+### LQR on CartPole Continuous
 [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/lqr.ipynb)
 
 ![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/cart_lqr.gif)
