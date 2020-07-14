@@ -3,6 +3,7 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
 ## Table of Contents
 - [List of Custom Environments](#list-of-custom-environments)
 - [Quadrotor-2D](#quadrotor-2d)
+  * [Trajectory Optimization on Quadrotor-2D](#trajectory-optimization-on-quadrotor-2d)
   * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
 - [CartPole Continous](#cartpole-continous)
   * [LQR on CartPole Continous](#lqr-on-cartpole-continous)
@@ -25,6 +26,12 @@ The below is a list of custom environments that I built using <a href="https://g
 <p>
 <img src="https://latex.codecogs.com/gif.latex?\begin{}&space;\\m&space;\ddot{x}&space;=&space;-(u_1&space;&plus;&space;u_2)\sin\theta,&space;\label{eq:quad_x}\\&space;m&space;\ddot{y}&space;=&space;(u_1&space;&plus;&space;u_2)\cos\theta&space;-&space;mg,&space;\label{eq:quad_y}\\&space;I&space;\ddot\theta&space;=&space;r&space;(u_1&space;-&space;u_2)&space;\label{eq:quad_theta}&space;\end{}" title="\begin{} \\m \ddot{x} = -(u_1 + u_2)\sin\theta, \label{eq:quad_x}\\ m \ddot{y} = (u_1 + u_2)\cos\theta - mg, \label{eq:quad_y}\\ I \ddot\theta = r (u_1 - u_2) \label{eq:quad_theta} \end{}" width="150" height="60"/>
 </p>
+
+### Trajectory Optimization on Quadrotor-2D
+[here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/trajectory_optimisation.ipynb)
+
+![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/trajopt_quad2d.gif)
+![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/trajopt_quadrotor2d.png)
 
 ### LQR on Quadrotor-2D
 LQR [here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Quadrotor%202D%20/lqr.ipynb) works essentially out of the box for Quadrotors, if linearized around a nominal fixed point (where the non-zero thrust from the propellers is balancing gravity).
