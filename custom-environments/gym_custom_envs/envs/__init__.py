@@ -1,4 +1,5 @@
 from gym_custom_envs.envs.vibrating_pendulum_env import VibPenEnv
 from gym_custom_envs.envs.double_integrator_env import DoubIntEnv
-from gym_custom_envs.envs.quadrotor_2d_env import Quad2DEnv
+from gym_custom_envs.envs.quadrotor_2d_env import Quad2DEnv_v0
+from gym_custom_envs.envs.quad2d_trajopt import Quad2DEnv_trajopt
 from gym_custom_envs.envs.cart_pole_conti_env import CartPoleContiEnv

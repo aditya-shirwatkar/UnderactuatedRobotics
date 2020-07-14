@@ -5,7 +5,7 @@ from gym.utils import seeding
 import numpy as np
 from os import path
 
-class Quad2DEnv_v0(gym.Env):
+class Quad2DEnv_trajopt(gym.Env):
     metadata = {
         'render.modes': ['human', 'rgb_array'],
         'video.frames_per_second': 24
@@ -49,33 +49,40 @@ class Quad2DEnv_v0(gym.Env):
         self.np_random, seed = seeding.np_random(seed)
         return [seed]
 
-    def step(self, act):
+    def step(self, X):
 
         x, y, theta, x_dot, y_dot, theta_dot = self.state
         theta = (((theta+np.pi) % (2*np.pi))) - np.pi
-        dt = self.dt
-        m = self.m
-        l = self.l
-        I = self.I
-        g = self.gravity
-        u1 = act[0]
-        u2 = act[1]
-        costheta = np.cos(theta)
-        sintheta = np.sin(theta)
+        # dt = self.dt
+        # m = self.m
+        # l = self.l
+        # I = self.I
+        # g = self.gravity
+        # u1 = act[0]
+        # u2 = act[1]
+        # costheta = np.cos(theta)
+        # sintheta = np.sin(theta)
 
-        x_ddot = -((u1 + u2)*sintheta)/m
-        y_ddot = (((u1 + u2)*costheta) - (m*g))/m
-        theta_ddot = ((u1 - u2)*l/2)/I
+        # x_ddot = -((u1 + u2)*sintheta)/m
+        # y_ddot = (((u1 + u2)*costheta) - (m*g))/m
+        # theta_ddot = ((u1 - u2)*l/2)/I
 
-        theta_dot = theta_dot + theta_ddot*dt
-        y_dot = y_dot + y_ddot*dt
-        x_dot = x_dot + x_ddot*dt
+        # theta_dot = theta_dot + theta_ddot*dt
+        # y_dot = y_dot + y_ddot*dt
+        # x_dot = x_dot + x_ddot*dt
 
-        theta = theta + theta_dot * dt
-        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
-        y = y + y_dot * dt
-        x = x + x_dot * dt
-
+        # theta = theta + theta_dot * dt
+        # theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        # y = y + y_dot * dt
+        # x = x + x_dot * dt
+        x = X[0]
+        y = X[1]
+        theta = X[2]
+        x_dot = X[3]
+        y_dot = X[4]
+        theta_dot = X[5]
+        u1 = X[6]
+        u2 = X[7]
         self.state = (x, y, theta, x_dot, y_dot, theta_dot)
 
         done = bool(
@@ -107,7 +114,7 @@ class Quad2DEnv_v0(gym.Env):
     def reset(self):
         self.state = [np.random.uniform(low=-self.x_threshold/1.5, high=self.x_threshold/1.5),
                       np.random.uniform(low=-self.y_threshold/1.5, high=self.y_threshold/1.5),
-                      np.random.uniform(low=-self.O_threshold/6, high=self.O_threshold/6),
+                      np.random.uniform(low=-self.O_threshold, high=self.O_threshold),
                       0,0,0]
         return np.array(self.state)
 

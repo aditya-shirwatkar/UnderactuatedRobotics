@@ -63,7 +63,7 @@ class DoubIntEnv(gym.Env):
         if self.ep_count >= self.ep_limit:
             done = True
 
-        if abs(q) >= (self.map_limit - 0.1):
+        if abs(q) >= (self.map_limit):
             cost = -abs(q) - abs(q_dot)
             done = True
 
