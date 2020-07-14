@@ -6,9 +6,11 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
   * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
 - [CartPole Continous](#cartpole-continous)
   * [LQR on CartPole Continous](#lqr-on-cartpole-continous)
-- [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
 - [Double Integrator](#double-integrator)
   * [LQR on Double Integrator](#lqr-on-double-integrator)
+  * [Trajectory Optimization on Double Integrator](#trajectory-optimization-on-double-integrator)
+- [Pendulum with Vibrating Base](#pendulum-with-vibrating-base)
+
 
 ## List of Custom Environments
 The below is a list of custom environments that I built using <a href="https://gym.openai.com/">OpenAI gym</a>, feel free to use them however you want
@@ -43,7 +45,29 @@ Consider the full swing-up and balance control problem, which requires a full no
 
 ![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Cart%20Pole%20Continuous/cart_lqr.gif)
 
+## Double Integrator
+<p>Consider the double integrator system</p>
+
+<p><img src="https://latex.codecogs.com/gif.latex?\ddot{q}&space;=&space;u,&space;\quad&space;|u|&space;\le&space;1." title="\ddot{q} = u, \quad |u| \le 1." /></p>
+
+<p>If you would like a mechanical analog of the system, then you can think about this as a unit mass brick moving along the x-axis on a frictionless surface, with a control input which provides a horizontal force, <i>u</i> . The task is to find a policy <img src="https://latex.codecogs.com/gif.latex?\pi&space;({\bf{x}},&space;t)" title="\pi ({\bf{x}}, t)" /> for the system where, 
+ <img src="https://latex.codecogs.com/gif.latex?{\bf{x}}=[q,\dot{q}]^T" title="{\bf{x}}=[q,\dot{q}]^T" /> to regulate this brick to <img src="https://latex.codecogs.com/gif.latex?{\bf{x}}=[0,0]^T" title="{\bf{x}}=[0,0]^T" /> 
+.
+</p>
+
+### LQR on Double Integrator
+
+<p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
+<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_lqr.gif" /></p>
+
+### Trajectory Optimization on Double Integrator
+[here](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/trajectory_optimization.ipynb)
+
+![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_trajopt.gif)
+![](https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/trajopt_d_i.png)
+
 ## Pendulum with Vibrating Base
+
 <p>Consider <a href = https://github.com/aditya-shirwatkar/UnderactuatedRobotics/tree/master/Pendulum%20with%20Vibrating%20Base> here </a>
  an actuated pendulum whose base (pivot of the rod) is forced to oscillate horizontally according to the harmonic law
 <img src="https://latex.codecogs.com/gif.latex?h&space;*&space;\sin{\omega&space;t}" title="h * \sin{\omega t}" />
@@ -58,17 +82,3 @@ Consider the full swing-up and balance control problem, which requires a full no
 
 <p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Pendulum%20with%20Vibrating%20Base/vibPen_const_ang_vel.gif" /></p>
 
-
-## Double Integrator
-<p>Consider the double integrator system</p>
-
-<p><img src="https://latex.codecogs.com/gif.latex?\ddot{q}&space;=&space;u,&space;\quad&space;|u|&space;\le&space;1." title="\ddot{q} = u, \quad |u| \le 1." /></p>
-
-<p>If you would like a mechanical analog of the system, then you can think about this as a unit mass brick moving along the x-axis on a frictionless surface, with a control input which provides a horizontal force, <i>u</i> . The task is to find a policy <img src="https://latex.codecogs.com/gif.latex?\pi&space;({\bf{x}},&space;t)" title="\pi ({\bf{x}}, t)" /> for the system where, 
- <img src="https://latex.codecogs.com/gif.latex?{\bf{x}}=[q,\dot{q}]^T" title="{\bf{x}}=[q,\dot{q}]^T" /> to regulate this brick to <img src="https://latex.codecogs.com/gif.latex?{\bf{x}}=[0,0]^T" title="{\bf{x}}=[0,0]^T" /> 
-.
-</p>
-
-### LQR on Double Integrator
-<p><a href="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/lqr.ipynb">here</a></p>
-<p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Double%20Integrator/d_i_lqr.gif" /></p>
