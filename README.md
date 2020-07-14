@@ -6,7 +6,7 @@ I'll be implementing few algorithms in Underactuated Robotics and also solving s
   * [Trajectory Optimization on Quadrotor-2D](#trajectory-optimization-on-quadrotor-2d)
   * [LQR on Quadrotor-2D](#lqr-on-quadrotor-2d)
 - [CartPole Continuous](#cartpole-continuous)
-  * [LQR on CartPole Contiunous](#lqr-on-cartpole-contiunous)
+  * [LQR on CartPole Contiunous](#lqr-on-cartpole-continuous)
 - [Double Integrator](#double-integrator)
   * [LQR on Double Integrator](#lqr-on-double-integrator)
   * [Trajectory Optimization on Double Integrator](#trajectory-optimization-on-double-integrator)
