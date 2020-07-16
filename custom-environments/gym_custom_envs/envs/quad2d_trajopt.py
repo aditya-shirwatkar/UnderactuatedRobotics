@@ -11,18 +11,18 @@ class Quad2DEnv_trajopt(gym.Env):
         'video.frames_per_second': 24
     }
 
-    def __init__(self, dt=0.005):
+    def __init__(self, dt=0.02):
         self.gravity = 10.
-        self.m = 0.2
+        self.m = 0.5
         self.l = 0.5 
         self.I = self.m*(self.l**2)/12
         self.thrust_max = 15.0
         self.dt = dt  # seconds between state updates
         self.kinematics_integrator = 'euler'
 
-        self.x_threshold = 2.4
-        self.y_threshold = 2.4
-        self.O_threshold = 2*np.pi
+        self.x_threshold = 2.5
+        self.y_threshold = 2.5
+        self.O_threshold = np.pi
 
         self.goal = np.array([0.0 ,0.0, 0.0])
 
@@ -52,16 +52,25 @@ class Quad2DEnv_trajopt(gym.Env):
     def step(self, X):
 
         x, y, theta, x_dot, y_dot, theta_dot = self.state
-        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        # theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        x = X[0]
+        y = X[1]
+        theta = X[2]
+        x_dot = X[3]
+        y_dot = X[4]
+        theta_dot = X[5]
+        u1 = X[6]
+        u2 = X[7]
         # dt = self.dt
         # m = self.m
         # l = self.l
         # I = self.I
         # g = self.gravity
-        # u1 = act[0]
-        # u2 = act[1]
+        # # u1 = act[0]
+        # # u2 = act[1]
         # costheta = np.cos(theta)
         # sintheta = np.sin(theta)
+        # theta = np.arctan2(sintheta, costheta)
 
         # x_ddot = -((u1 + u2)*sintheta)/m
         # y_ddot = (((u1 + u2)*costheta) - (m*g))/m
@@ -72,17 +81,10 @@ class Quad2DEnv_trajopt(gym.Env):
         # x_dot = x_dot + x_ddot*dt
 
         # theta = theta + theta_dot * dt
-        # theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        # theta = np.arctan2(sintheta, costheta)
         # y = y + y_dot * dt
         # x = x + x_dot * dt
-        x = X[0]
-        y = X[1]
-        theta = X[2]
-        x_dot = X[3]
-        y_dot = X[4]
-        theta_dot = X[5]
-        u1 = X[6]
-        u2 = X[7]
+
         self.state = (x, y, theta, x_dot, y_dot, theta_dot)
 
         done = bool(
@@ -93,12 +95,12 @@ class Quad2DEnv_trajopt(gym.Env):
         )
 
         done2 = bool(
-            abs(x) < 0.1
-            and abs(y) < 0.1
+            abs(x) < 0.01
+            and abs(y) < 0.01
             and abs(theta) < 0.01
-            and abs(x_dot) < 0.1
-            and abs(y_dot) < 0.1
-            and abs(theta_dot) < 0.1
+            and abs(x_dot) < 0.01
+            and abs(y_dot) < 0.01
+            and abs(theta_dot) < 0.01
         )
 
         if not done:
@@ -112,8 +114,8 @@ class Quad2DEnv_trajopt(gym.Env):
         return np.array(self.state), reward, done, {}
 
     def reset(self):
-        self.state = [np.random.uniform(low=-self.x_threshold/1.5, high=self.x_threshold/1.5),
-                      np.random.uniform(low=-self.y_threshold/1.5, high=self.y_threshold/1.5),
+        self.state = [np.random.uniform(low=-self.x_threshold/1.01, high=self.x_threshold/1.01),
+                      np.random.uniform(low=-self.y_threshold/1.01, high=self.y_threshold/1.01),
                       np.random.uniform(low=-self.O_threshold, high=self.O_threshold),
                       0,0,0]
         return np.array(self.state)
@@ -123,7 +125,11 @@ class Quad2DEnv_trajopt(gym.Env):
         screen_height = 600
 
         x, y, theta, x_dot, y_dot, theta_dot = self.state
-        theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        # theta = (((theta+np.pi) % (2*np.pi))) - np.pi
+        costheta = np.cos(theta)
+        sintheta = np.sin(theta)
+        theta = np.arctan2(sintheta, costheta)
+
         world_width = self.x_threshold * 2
         scale = screen_width/world_width
         carty = y * scale + screen_height/ 2.0 
