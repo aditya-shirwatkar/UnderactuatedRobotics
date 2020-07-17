@@ -8,8 +8,8 @@ from pydrake.systems.framework import (BasicVector, LeafSystem, PublishEvent,
 from pydrake.systems.pyplot_visualizer import PyPlotVisualizer
 
 BipedState = namedview(
-    "BipedState", ["q1", "q2", "q3", "q4", "q5", 
-                "q1dot", "q2dot", "q3dot", "q4dot", "q5dot"])
+    "BipedState", ["l_tip","q1", "q2", "q3", "q4", "q5", "r_tip", 
+                "l_tipdot","q1dot", "q2dot", "q3dot", "q4dot", "q5dot", "r_tipdot"])
 
 class MyCompassGait(LeafSystem):
 
@@ -17,7 +17,7 @@ class MyCompassGait(LeafSystem):
         LeafSystem.__init__(self)
 
         self.DeclareVectorInputPort("u", BasicVector(4))
-        self.DeclareContinuousState(BasicVector(np.zeros(10)), 5, 5, 0)
+        self.DeclareContinuousState(BasicVector(np.zeros(14)), 7, 7, 0)
 
         self.DeclareVectorOutputPort("state", BasicVector(10), self.CopyStateOut)
 
