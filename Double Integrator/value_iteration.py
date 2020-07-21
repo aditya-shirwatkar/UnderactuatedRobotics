@@ -48,7 +48,7 @@ def draw(iteration, mesh, cost_to_go, policy):
     # Drawing is slow, don't draw every frame.
     if iteration % 20 != 0:
         return
-    plt.title("iteration " + str(iteration))
+    plt.suptitle("iteration " + str(iteration))
     J = np.reshape(cost_to_go, Q.shape)
     surf = ax1.plot_surface(Q, Qdot, J, rstride=1, cstride=1, cmap=cm.jet)
 
@@ -58,7 +58,7 @@ def draw(iteration, mesh, cost_to_go, policy):
     if plt.get_backend() != u"template":
         fig.canvas.draw()
         plt.pause(1e-10)
-
+    fig.savefig('img/quad/'+str(iteration)+'.png')
     surf.remove()
     surf2.remove()
 
@@ -118,12 +118,10 @@ fig = plt.figure(figsize=(9, 4))
 ax1, ax2 = fig.subplots(1, 2, subplot_kw=dict(projection='3d'))
 ax1.set_xlabel("q")
 ax1.set_ylabel("qdot")
-ax1.set_title("Cost-to-Go")
+ax1.set_title("Quadratic-Cost-to-Go")
+
 ax2.set_xlabel("q")
 ax2.set_ylabel("qdot")
-ax2.set_title("Policy")
+ax2.set_title("Bang-Bang-Policy")
 
 policy = solve()
-u_final = simulate()
-
-print(u_final.data())
