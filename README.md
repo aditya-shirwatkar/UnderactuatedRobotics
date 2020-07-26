@@ -95,4 +95,3 @@ Consider the full swing-up and balance control problem, which requires a full no
 <p>below is the result through feedback cancellation,</p>
 
 <p><img src="https://github.com/aditya-shirwatkar/UnderactuatedRobotics/blob/master/Pendulum%20with%20Vibrating%20Base/gifs/vibPen_const_ang_vel.gif" /></p>
-
